@@ -18,6 +18,9 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
+      <%= f.label :introduction, "Introduction" %>
+      <%= f.text_field :introduction, class: 'from-control' %>
+
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
 
