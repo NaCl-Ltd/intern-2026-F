@@ -16,28 +16,22 @@
     </aside>
     <div class="col-md-8">
 
+
+
+
+      <h3>Micropost Feed</h3>
+
 <!----------------------------------------------------------->
 <% if @pinned_micropost %>
-<h3>Pinned micropost</h3>
 <ol class="microposts">
-  <%= render @pinned_micropost %>
+  <%= render @pinned_micropost, pinned: true %>
 </ol>
 <% end %>
 <!----------------------------------------------------------->
 
-
-      <h3>Micropost Feed</h3>
       <%= render 'shared/feed' %>
     </div>
   </div>
-
-
-
-
-
-
-
-
 
 
 <% else %>

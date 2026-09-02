@@ -1,4 +1,13 @@
 <li id="micropost-<%= micropost.id %>">
+
+<!------------------------------------------------->
+  <% if @pinned_micropost && micropost.id == @pinned_micropost.id %>
+  <div class="pinned-label">
+    📌 Pinned
+  </div>
+  <% end %>
+<!------------------------------------------------->
+
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
@@ -12,6 +21,15 @@
     <% if current_user?(micropost.user) %>
       <%= link_to "delete", micropost, data: { "turbo-method": :delete,
                                                turbo_confirm: "You sure?" } %>
+
+<!------------------------------------------------->
+      <% if current_user == micropost.user %>
+      <%= link_to "Pin",
+          pin_micropost_path(micropost),
+          data: { turbo_method: :patch } %>
+      <% end %>
+<!------------------------------------------------->
+
     <% end %>
   </span>
 </li>

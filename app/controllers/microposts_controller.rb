@@ -24,6 +24,17 @@ class MicropostsController < ApplicationController
     end
   end
 
+#######################################
+  def pin
+    micropost = current_user.microposts.find(params[:id])
+    
+    current_user.update(pinned: micropost.id)
+    
+    flash[:success] = "Micropost pinned!"
+    redirect_back(fallback_location: root_url)
+  end
+#######################################
+
   private
 
     def micropost_params
