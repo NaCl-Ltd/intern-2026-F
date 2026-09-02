@@ -86,7 +86,7 @@ class User < ApplicationRecord
 
   # pinned method
   def pinned_micropost # add myself
-    Micropost.find_by(id: :pinned)
+    Micropost.find_by(id: pinned)
   end
 
   # ユーザーのステータスフィードを返す

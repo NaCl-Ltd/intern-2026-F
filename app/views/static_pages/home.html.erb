@@ -1,4 +1,6 @@
 <% if logged_in? %>
+
+
   <div class="row">
     <aside class="col-md-4">
       <section class="user_info">
@@ -13,10 +15,31 @@
       </section>
     </aside>
     <div class="col-md-8">
+
+<!----------------------------------------------------------->
+<% if @pinned_micropost %>
+<h3>Pinned micropost</h3>
+<ol class="microposts">
+  <%= render @pinned_micropost %>
+</ol>
+<% end %>
+<!----------------------------------------------------------->
+
+
       <h3>Micropost Feed</h3>
       <%= render 'shared/feed' %>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
 <% else %>
   <div class="center jumbotron">
     <h1>Welcome to the Sample App</h1>
