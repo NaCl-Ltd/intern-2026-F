@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_01_062655) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_02_024050) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -71,7 +71,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_01_062655) do
     t.text "introduction"
     t.string "name"
     t.string "password_digest"
-    t.text "pinnde"
+    t.text "pinned"
     t.string "remember_digest"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
