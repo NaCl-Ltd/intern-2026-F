@@ -15,6 +15,11 @@ class MicropostsController < ApplicationController
       lines = body.lines.map(&:chomp)
       
       expr = lines.reject(&:empty?).last
+
+      if expr.length > 100
+        content = "Lisp Error: expression too long (max 100 chars)"
+      else
+
       comment_lines = lines[0...lines.rindex(expr)].map do |line|
         line.sub(/^;\s*/, "")
       end
@@ -26,6 +31,7 @@ class MicropostsController < ApplicationController
         "#{expr}\n" \
         "=> #{result}"
      end
+end
 ####################
 
 
