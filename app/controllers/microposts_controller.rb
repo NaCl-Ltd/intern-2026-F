@@ -4,18 +4,17 @@ class MicropostsController < ApplicationController
 
   def create
 
+
 ####################
     content = micropost_params[:content]
 
     if content.start_with?(":lisp")
-#      expr = content.delete_prefix(":lisp ")
- ###################
+
       body = content.delete_prefix(":lisp").strip
 
       lines = body.lines.map(&:chomp)
       
       expr = lines.reject(&:empty?).last
-#      comment_lines = lines[0...lines.rindex(expr)]
       comment_lines = lines[0...lines.rindex(expr)].map do |line|
         line.sub(/^;\s*/, "")
       end
@@ -26,18 +25,10 @@ class MicropostsController < ApplicationController
         "#{comment_lines.join("\n")}\n\n" \
         "#{expr}\n" \
         "=> #{result}"
-####################
-
-#       begin
-# #        content = Lisp.eval(expr).to_s
-#         content = "#{expr} => #{Lisp.eval(expr)}"
-#       rescue => e
-#         content = "Lisp Error: #{e.message}"
-#       end
      end
 ####################
 
- #   @micropost = current_user.microposts.build(micropost_params)
+
     @micropost = current_user.microposts.build(
       content: content)
 
