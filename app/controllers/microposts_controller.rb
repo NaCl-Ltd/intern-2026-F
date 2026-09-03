@@ -3,7 +3,42 @@ class MicropostsController < ApplicationController
   before_action :correct_user,   only: :destroy
 
   def create
-    @micropost = current_user.microposts.build(micropost_params)
+
+
+####################
+    content = micropost_params[:content]
+
+    if content.start_with?(":lisp")
+      body = content.delete_prefix(":lisp").strip
+      lines = body.lines.map(&:chomp)  
+      expr = lines.reject(&:empty?).last
+      if expr.length > 100
+        content = "Lisp Error: expression too long (max 100 chars)"
+      else
+
+###################
+        begin
+          comment_lines = lines[0...lines.rindex(expr)].map do |line|
+            line.sub(/^;\s*/, "")
+          end
+
+          result = Lisp.culc(expr)      
+          content =
+            "#{comment_lines.join("\n")}\n\n" \
+            "#{expr}\n" \
+            "=> #{result}"
+
+        rescue => e
+          content = "Lisp Error: #{e.message}"
+        end
+      end
+    end
+####################
+
+
+    @micropost = current_user.microposts.build(
+      content: content)
+
     @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
       flash[:success] = "Micropost created!"
