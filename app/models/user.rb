@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  enum gender: { undisclosed: 0, male: 1, female: 2}
+  enum :gender, { undisclosed: 0, male: 1, female: 2 }
 
   # 年齢計算
   def age

@@ -69,7 +69,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_040523) do
     t.date "birthday"
     t.datetime "created_at", null: false
     t.string "email"
-    t.string "gender"
+    t.integer "gender", default: 0
     t.text "introduction"
     t.string "name"
     t.string "password_digest"
