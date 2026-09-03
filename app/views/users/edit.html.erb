@@ -19,7 +19,10 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
 
       <%= f.label :introduction, "Introduction" %>
-      <%= f.text_field :introduction, class: 'from-control' %>
+      <%= f.text_field :introduction, class: 'form-control' %>
+
+      <%= f.date_field :birthday %>
+      <%= f.select :gender, User.genders.keys.map { |g| [g.humanize, g] }, {}, { class: 'form-control' } %>
 
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
