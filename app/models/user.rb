@@ -8,6 +8,7 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :availabilities, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -123,6 +124,15 @@ class User < ApplicationRecord
   # 現在のユーザーが他のユーザーをフォローしていればtrueを返す
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def available_dates=(str)
+    dates = str.split(',').map(&:strip).reject(&:blank?).map { |date_str| Date.parse(date_str) rescue nil }.compact
+    self.availabilities = dates.map { |date| Availability.new(available_date: date) }
+  end
+
+  def available_dates
+    availabilities.map{ |a| a.available_date.to_s }.join(', ')
   end
 
   private
