@@ -463,7 +463,7 @@ span.image {
 }
 
 .parity-terminal__body p {
-  margin: 0 0 4px;
+  margin: 0 0 -2px;
 }
 
 .parity-terminal__body hr {
