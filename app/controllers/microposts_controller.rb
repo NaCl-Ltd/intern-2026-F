@@ -9,29 +9,30 @@ class MicropostsController < ApplicationController
     content = micropost_params[:content]
 
     if content.start_with?(":lisp")
-
       body = content.delete_prefix(":lisp").strip
-
-      lines = body.lines.map(&:chomp)
-      
+      lines = body.lines.map(&:chomp)  
       expr = lines.reject(&:empty?).last
-
       if expr.length > 100
         content = "Lisp Error: expression too long (max 100 chars)"
       else
 
-      comment_lines = lines[0...lines.rindex(expr)].map do |line|
-        line.sub(/^;\s*/, "")
+###################
+        begin
+          comment_lines = lines[0...lines.rindex(expr)].map do |line|
+            line.sub(/^;\s*/, "")
+          end
+
+          result = Lisp.eval(expr)      
+          content =
+            "#{comment_lines.join("\n")}\n\n" \
+            "#{expr}\n" \
+            "=> #{result}"
+
+        rescue => e
+          content = "Lisp Error: #{e.message}"
+        end
       end
-      
-      result = Lisp.eval(expr)
-      
-      content =
-        "#{comment_lines.join("\n")}\n\n" \
-        "#{expr}\n" \
-        "=> #{result}"
-     end
-end
+    end
 ####################
 
 

@@ -32,7 +32,11 @@ class Lisp
         args.reduce(:/)
       end
     else
-      token.to_i
+      if token.match?(/\A-?\d+\z/)
+        token.to_i
+      else
+        raise "Invalid token: #{token}"
+      end
     end
   end
 end
