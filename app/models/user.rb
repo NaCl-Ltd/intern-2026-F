@@ -121,6 +121,15 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def available_dates=(str)
+    dates = str.split(',').map(&:strip).reject(&:blank?).map { |date_str| Date.parse(date_str) rescue nil }.compact
+    self.availabilities = dates.map { |date| Availability.new(available_date: date) }
+  end
+
+  def available_dates
+    availabilities.map{ |a| a.available_date.to_s }.join(', ')
+  end
+
   private
 
     # メールアドレスをすべて小文字にする

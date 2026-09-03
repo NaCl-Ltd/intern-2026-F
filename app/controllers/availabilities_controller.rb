@@ -1,18 +1,19 @@
 class AvailabilitiesController < ApplicationController
-  before_action :logged_in_user, only: [:create, :destroy]
-
-  def create
-    current_user.availabilities.create(
-      available_date: params[:availability][:available_date]
-    )
-
-    redirect_to current_user
-  end
-
-  def destroy
-    availability = current_user.availabilities.find(params[:id])
-    availability.destroy
-
-    redirect_to current_user
-  end
+    before_action :set_user, only: [:edit, :update]
+    def edit
+    end
+    def update
+        if @user.update(user_params)
+            redirect_to @user, notice: "Availability updated successfully."
+        end
+    end
+    private
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+    def user_params
+        Rails.logger.debug"---------------------------------------"
+        Rails.logger.debug params
+      params.require(:user).permit(:available_dates)
+    end
 end
