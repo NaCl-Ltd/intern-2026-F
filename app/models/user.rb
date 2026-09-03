@@ -19,6 +19,18 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+  enum :gender, { undisclosed: 0, male: 1, female: 2 }
+
+  # 年齢計算
+  def age
+    return nil unless birthday
+
+    today = Date.today
+    age = today.year - birthday.year
+    age -= 1 if today < birthday + age.years
+    age
+  end
+
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -120,4 +132,5 @@ class User < ApplicationRecord
       self.activation_token  = User.new_token
       self.activation_digest = User.digest(activation_token)
     end
+
 end

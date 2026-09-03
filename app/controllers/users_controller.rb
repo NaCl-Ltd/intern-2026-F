@@ -67,7 +67,9 @@ class UsersController < ApplicationController
       Rails.logger.debug "[DEBUG] params: #{params}"
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation,
-                                   :introduction)
+                                   :introduction,
+                                   :birthday,
+                                   :gender)
     end
 
     # beforeフィルタ
