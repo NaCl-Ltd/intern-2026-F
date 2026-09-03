@@ -16,7 +16,12 @@
     "undisclosed" => "回答しない"
   }[@user.gender] %>
 </p>
-      
+
+<%= form_with model: @user do |f| %>
+  <%= f.text_field :available_dates, data: { controller: "flatpickr" }, placeholder: "Select available dates", class: "form-control" %>
+  <%= f.submit "Save", class: "btn btn-primary mt-2" %>
+<% end %>
+
       <p class="user-introduction"><%= @user.introduction %></p>
     </section>
     <section class="stats">
