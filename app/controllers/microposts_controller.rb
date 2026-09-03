@@ -7,7 +7,7 @@ class MicropostsController < ApplicationController
 ####################
     content = micropost_params[:content]
 
-    if content.start_with?(":lisp ")
+    if content.start_with?(":lisp")
 #      expr = content.delete_prefix(":lisp ")
  ###################
       body = content.delete_prefix(":lisp").strip
