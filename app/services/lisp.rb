@@ -1,5 +1,5 @@
 class Lisp
-  def self.eval(expr)
+  def self.culc(expr)
     tokens = expr.gsub("(", " ( ")
                .gsub(")", " ) ")
                .split

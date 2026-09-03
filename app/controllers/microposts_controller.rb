@@ -22,7 +22,7 @@ class MicropostsController < ApplicationController
             line.sub(/^;\s*/, "")
           end
 
-          result = Lisp.eval(expr)      
+          result = Lisp.culc(expr)      
           content =
             "#{comment_lines.join("\n")}\n\n" \
             "#{expr}\n" \
