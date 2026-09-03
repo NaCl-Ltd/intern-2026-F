@@ -1,0 +1,61 @@
+<% provide(:title, "Parity Game Result") %>
+
+<div class="parity-game">
+  <div class="parity-terminal">
+    <div class="parity-terminal__header">
+      GAME RESULT
+    </div>
+
+    <div class="parity-terminal__body">
+      <% if @correct %>
+        <p class="parity-result parity-result--win">
+          RESULT: YOU WIN
+        </p>
+      <% else %>
+        <p class="parity-result parity-result--lose">
+          RESULT: YOU LOSE
+        </p>
+      <% end %>
+
+      <hr>
+
+      <!-- <p>$ reveal --micropost</p> -->
+
+      <p>Micropost ID: <%= @micropost.id %></p>
+
+      <div class="parity-revealed-post">
+        <%= simple_format(@micropost.content) %>
+      </div>
+
+      <p>
+        Character count:
+        <strong><%= @character_count %></strong>
+      </p>
+
+      <p>
+        Correct answer:
+        <strong>
+          <%= @correct_parity == "even" ? "偶数" : "奇数" %>
+        </strong>
+      </p>
+
+      <p>
+        Your answer:
+        <strong>
+          <%= @guess == "even" ? "偶数" : "奇数" %>
+        </strong>
+      </p>
+
+      <p class="parity-note">
+        ※空白と改行を除いた文字数で判定しています。
+      </p>
+
+      <div class="parity-actions">
+        <%= link_to "次の問題",
+                    parity_game_path,
+                    class: "parity-button" %>
+
+      </div>
+    </div>
+  </div>
+</div>

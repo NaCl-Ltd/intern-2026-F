@@ -1,0 +1,50 @@
+<% provide(:title, "Parity Game") %>
+
+<div class="parity-game">
+  <div class="parity-terminal">
+    <div class="parity-terminal__header">
+      SECRET MICROPOST PARITY GAME
+    </div>
+
+    <div class="parity-terminal__body">
+      <% if @error_message %>
+        <p>ERROR: <%= @error_message %></p>
+
+        <%= link_to "ホームへ戻る",
+                    root_path,
+                    class: "parity-button" %>
+      <% else %>
+        <!-- <p>$ micropost --select-random</p> -->
+        <p>Random micropost selected.</p>
+        <p>Content: [HIDDEN]</p>
+        <p>Character count: [HIDDEN]</p>
+
+        <hr>
+
+        <p>投稿の文字数は偶数ですか、奇数ですか？</p>
+
+        <%= form_with url: answer_parity_game_path,
+            method: :post,
+            data: { turbo: false } do %>
+      
+        <div class="parity-choices">
+          <label class="parity-choice">
+            <%= radio_button_tag :guess, "even", false,
+                required: true %>
+            <span>偶数</span>
+          </label>
+
+          <label class="parity-choice">
+            <%= radio_button_tag :guess, "odd", false,
+                required: true %>
+            <span>奇数</span>
+          </label>
+        </div>
+        
+        <%= submit_tag "回答を確定する",
+            class: "parity-button" %>
+        <% end %>
+        <% end %>
+    </div>
+  </div>
+</div>
