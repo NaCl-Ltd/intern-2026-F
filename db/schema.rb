@@ -73,6 +73,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_02_040523) do
     t.text "introduction"
     t.string "name"
     t.string "password_digest"
+    t.text "pinned"
     t.string "remember_digest"
     t.string "reset_digest"
     t.datetime "reset_sent_at"

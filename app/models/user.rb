@@ -96,6 +96,11 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  # pinned method
+  def pinned_micropost # add myself
+    Micropost.find_by(id: pinned)
+  end
+
   # ユーザーのステータスフィードを返す
   def feed
     following_ids = "SELECT followed_id FROM relationships
