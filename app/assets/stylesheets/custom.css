@@ -456,3 +456,33 @@ span.image {
   gap: 10px;
   margin-top: 25px;
 }
+
+.parity-terminal__body {
+  padding: 20px 24px;
+  line-height: 1.2;
+}
+
+.parity-terminal__body p {
+  margin: 0 0 4px;
+}
+
+.parity-terminal__body hr {
+  margin: 14px 0;
+}
+
+.parity-choices {
+  gap: 24px;
+  margin: 12px 0;
+}
+
+.parity-choice {
+  line-height: 1;
+}
+
+.parity-revealed-post {
+  line-height: 1.25;
+}
+
+.parity-revealed-post p {
+  margin: 0 0 4px;
+}

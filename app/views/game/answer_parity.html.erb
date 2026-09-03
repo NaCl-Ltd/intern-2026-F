@@ -19,9 +19,14 @@
 
       <hr>
 
-      <!-- <p>$ reveal --micropost</p> -->
+      <p>parity-game> reveal --micropost</p>
 
       <p>Micropost ID: <%= @micropost.id %></p>
+
+      <p>
+        Posted at:
+        <%= @micropost.created_at.in_time_zone.strftime("%Y-%m-%d %H:%M:%S") %>
+      </p>
 
       <div class="parity-revealed-post">
         <%= simple_format(@micropost.content) %>
@@ -35,23 +40,23 @@
       <p>
         Correct answer:
         <strong>
-          <%= @correct_parity == "even" ? "偶数" : "奇数" %>
+          <%= @correct_parity == "even" ? "even" : "odd" %>
         </strong>
       </p>
 
       <p>
         Your answer:
         <strong>
-          <%= @guess == "even" ? "偶数" : "奇数" %>
+          <%= @guess == "even" ? "even" : "odd" %>
         </strong>
       </p>
 
       <p class="parity-note">
-        ※空白と改行を除いた文字数で判定しています。
+        Whitespace and line breaks are excluded from the character count.
       </p>
 
       <div class="parity-actions">
-        <%= link_to "次の問題",
+        <%= link_to "NEXT ROUND",
                     parity_game_path,
                     class: "parity-button" %>
 

@@ -14,6 +14,8 @@ class GameController < ApplicationController
     end
     
     session[:parity_micropost_id] = micropost.id
+
+    @posted_at = micropost.created_at
     
     Rails.logger.debug(
       "[PARITY] user=#{current_user.id}, " \

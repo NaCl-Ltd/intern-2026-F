@@ -10,18 +10,26 @@
       <% if @error_message %>
         <p>ERROR: <%= @error_message %></p>
 
-        <%= link_to "ホームへ戻る",
+        <%= link_to "Return to Home",
                     root_path,
                     class: "parity-button" %>
       <% else %>
-        <!-- <p>$ micropost --select-random</p> -->
-        <p>Random micropost selected.</p>
+        <p>parity-game> micropost --select-random</p>
+        <p>[OK] Random micropost selected.</p>
+
+      <p>
+        Posted at:
+        <span class="parity-hint">
+          <%= @posted_at.in_time_zone.strftime("%Y-%m-%d %H:%M:%S") %>
+        </span>
+      </p>
+
         <p>Content: [HIDDEN]</p>
         <p>Character count: [HIDDEN]</p>
 
         <hr>
 
-        <p>投稿の文字数は偶数ですか、奇数ですか？</p>
+        <p>Is the character count of a micropost even or odd?</p>
 
         <%= form_with url: answer_parity_game_path,
             method: :post,
@@ -31,17 +39,17 @@
           <label class="parity-choice">
             <%= radio_button_tag :guess, "even", false,
                 required: true %>
-            <span>偶数</span>
+            <span>even</span>
           </label>
 
           <label class="parity-choice">
             <%= radio_button_tag :guess, "odd", false,
                 required: true %>
-            <span>奇数</span>
+            <span>odd</span>
           </label>
         </div>
         
-        <%= submit_tag "回答を確定する",
+        <%= submit_tag "SUBMIT ANSWER",
             class: "parity-button" %>
         <% end %>
         <% end %>
