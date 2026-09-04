@@ -9,6 +9,18 @@ Rails.application.routes.draw do
   get    "/login",   to: "sessions#new"
   post   "/login",   to: "sessions#create"
   delete "/logout",  to: "sessions#destroy"
+
+##############################################
+#   get "/secret", to: "static_pages#secret" # hide page
+  get  "/secret/parity-game",
+       to: "game#parity",
+       as: :parity_game
+
+  post "/secret/parity-game/answer",
+       to: "game#answer_parity",
+       as: :answer_parity_game
+##############################################
+
   resources :users do
     resources :availabilities,      only: [:edit , :update]
     member do

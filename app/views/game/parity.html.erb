@@ -1,0 +1,58 @@
+<% provide(:title, "Parity Game") %>
+
+<div class="parity-game">
+  <div class="parity-terminal">
+    <div class="parity-terminal__header">
+      SECRET MICROPOST PARITY GAME
+    </div>
+
+    <div class="parity-terminal__body">
+      <% if @error_message %>
+        <p>ERROR: <%= @error_message %></p>
+
+        <%= link_to "Return to Home",
+                    root_path,
+                    class: "parity-button" %>
+      <% else %>
+        <p>parity-game> micropost --select-random</p>
+        <p>[OK] Random micropost selected.</p>
+
+      <p>
+        Posted at:
+        <span class="parity-hint">
+          <%= @posted_at.in_time_zone.strftime("%Y-%m-%d %H:%M:%S") %>
+        </span>
+      </p>
+
+        <p>Content: [HIDDEN]</p>
+        <p>Character count: [HIDDEN]</p>
+
+        <hr>
+
+        <p>Is the character count of a micropost even or odd?</p>
+
+        <%= form_with url: answer_parity_game_path,
+            method: :post,
+            data: { turbo: false } do %>
+      
+        <div class="parity-choices">
+          <label class="parity-choice">
+            <%= radio_button_tag :guess, "even", false,
+                required: true %>
+            <span>even</span>
+          </label>
+
+          <label class="parity-choice">
+            <%= radio_button_tag :guess, "odd", false,
+                required: true %>
+            <span>odd</span>
+          </label>
+        </div>
+        
+        <%= submit_tag "SUBMIT ANSWER",
+            class: "parity-button" %>
+        <% end %>
+        <% end %>
+    </div>
+  </div>
+</div>

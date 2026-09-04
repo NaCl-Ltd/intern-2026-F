@@ -1,0 +1,66 @@
+<% provide(:title, "Parity Game Result") %>
+
+<div class="parity-game">
+  <div class="parity-terminal">
+    <div class="parity-terminal__header">
+      GAME RESULT
+    </div>
+
+    <div class="parity-terminal__body">
+      <% if @correct %>
+        <p class="parity-result parity-result--win">
+          RESULT: YOU WIN
+        </p>
+      <% else %>
+        <p class="parity-result parity-result--lose">
+          RESULT: YOU LOSE
+        </p>
+      <% end %>
+
+      <hr>
+
+      <p>parity-game> reveal --micropost</p>
+
+      <p>Micropost ID: <%= @micropost.id %></p>
+
+      <p>
+        Posted at:
+        <%= @micropost.created_at.in_time_zone.strftime("%Y-%m-%d %H:%M:%S") %>
+      </p>
+
+      <div class="parity-revealed-post">
+        <%= simple_format(@micropost.content) %>
+      </div>
+
+      <p>
+        Character count:
+        <strong><%= @character_count %></strong>
+      </p>
+
+      <p>
+        Correct answer:
+        <strong>
+          <%= @correct_parity == "even" ? "even" : "odd" %>
+        </strong>
+      </p>
+
+      <p>
+        Your answer:
+        <strong>
+          <%= @guess == "even" ? "even" : "odd" %>
+        </strong>
+      </p>
+
+      <p class="parity-note">
+        Whitespace and line breaks are excluded from the character count.
+      </p>
+
+      <div class="parity-actions">
+        <%= link_to "NEXT ROUND",
+                    parity_game_path,
+                    class: "parity-button" %>
+
+      </div>
+    </div>
+  </div>
+</div>
