@@ -17,6 +17,7 @@
   }[@user.gender] %>
 </p>
 
+<h4>＜空いている日＞</h4>
 <% @user.availabilities.pluck(:available_date).each do |date| %>
   <p><%= date.strftime("%Y年%m月%d日") %></p>
 <% end %>
